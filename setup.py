@@ -5,7 +5,7 @@ setup_args = dict(
     version='0.1',
     description='Descripción del proyecto',
     author='velcas',
-    packages=['main.py'],
+    py_modules=['main'],
     install_requires=[
         'telegram',
         'selenium'
