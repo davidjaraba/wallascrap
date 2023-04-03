@@ -32,18 +32,20 @@ driver = webdriver.Chrome(options=chrome_options)
 
 ## ALTERNATIVO
 uc.TARGET_VERSION = 85
-driver_alt = uc.Chrome()
+driver_atl_options = uc.ChromeOptions()
+driver_atl_options.add_argument('--headless')
+driver_alt = uc.Chrome(options=driver_atl_options)
+
 
 
 # conecto al bot de telegram
 bot = telegram.Bot(token=TOKEN)
 sleep(1)
 
-async def send_message(txt):
+async def send_message(txt, platform):
     print(txt)
-    with open("wallapop_encontrados.txt", "a") as archivo:
+    with open(platform+"_encontrados.txt", "a") as archivo:
         archivo.write("\n"+txt)
-
     try:
         txtList = txt.split('#@#@#')
 
@@ -55,10 +57,18 @@ async def send_message(txt):
         # Crea una marca de teclado en línea con la lista de botones
         reply_markup = InlineKeyboardMarkup(buttons)
 
-        text = "<b>{}</b> \nPrecio: {}\n{}\n<a href='{}'>>></a>".format(txtList[0],txtList[1], txtList[2],txtList[5])
+        platformStr = ''
+        if (platform == 'coches'):
+            platformStr = 'COCHES.NET'
+        elif (platform == 'wallapop'):
+            platformStr = 'WALLAPOP'
+        elif (platform == 'mila'):
+            platformStr = 'MILANUNCIOS'
+
+        text = "<em>{}</em>\n<strong>{}</strong> \n<b>Precio: {}</b>\n{}\n<a href='{}'>>></a>".format(platformStr,txtList[0],txtList[1], txtList[2],txtList[5])
 
         ##MIO
-        # await bot.send_message('393154264', text, parse_mode='HTML', reply_markup=reply_markup)
+        await bot.send_message('393154264', text, parse_mode='HTML', reply_markup=reply_markup)
 
         ##PP
         # await bot.send_message('5875517685', text, parse_mode='HTML', reply_markup=reply_markup)
@@ -93,9 +103,9 @@ def validate_coches_cookies():
         sleep(1)
         cerrar_btn = element.find_element(By.XPATH, '//button[@class="sui-AtomButton sui-AtomButton--primary sui-AtomButton--solid sui-AtomButton--center"]')
         cerrar_btn.click()
+        sleep(2)
     except TimeoutException:
         print('no hay cons')
-
 
 
 async def wallapop_check():
@@ -120,9 +130,14 @@ async def wallapop_check():
 
         sleep(1)
 
+        actions = ActionChains(driver_alt)
+        actions.send_keys(Keys.PAGE_DOWN).perform()
+
+        sleep(1)
+
         cards = driver.find_elements(By.CLASS_NAME, 'ItemCardList__item')
         if (cards is not None):
-            print('Coches encontrados: ')
+            print('WALLAPOP | Encontrados: ')
             for e in cards:
                 try:
 
@@ -173,7 +188,7 @@ async def wallapop_check():
                                                                                                                str(reservada),image)
 
                     if (res not in lineas):
-                        await send_message(res)
+                        await send_message(res, 'wallapop')
 
                 except NoSuchElementException as ex:
                     print(f"Error: no se encontró el elemento. Detalles: {ex}")
@@ -185,22 +200,178 @@ async def wallapop_check():
                 # except:
                 #     pass
 
+async def coches_check():
+
+    filters = []
+    with open("filters_coches.txt", "r") as archivo_fil:
+        filters = archivo_fil.readlines()
+        filters = [fl.rstrip("\n") for fl in filters]
+
+    for fls in filters:
+        driver_alt.get(fls)
+
+        # OBTENEMOS LOS COCHES YA ENVIADOS
+        lineas = []
+        with open("coches_encontrados.txt", "r") as archivo:
+            lineas = archivo.readlines()
+            lineas = [linea.rstrip("\n") for linea in lineas]
 
 
 
+        for i in range(20):
+            sleep(0.2)
+            driver_alt.execute_script("window.scrollBy(0, 600)")
+
+        sleep(3)
+
+        cards = driver_alt.find_elements(By.CLASS_NAME, 'sui-AtomCard')
+        if (cards is not None):
+            logging.info('CochesNET | encontrados: ')
+            print('CochesNET | encontrados: ')
+            for e in cards:
+                try:
+
+                    precio = e.find_element(By.CLASS_NAME, 'mt-TitleBasic-title').text
+                    titulo = e.find_element(By.CLASS_NAME, 'mt-CardBasic-title').text
+                    property = e.find_element(By.CLASS_NAME, 'mt-CardAd-attr').text
+                    image = e.find_element(By.TAG_NAME, 'img').get_attribute('src')
+                    enlace = e.find_element(By.TAG_NAME, 'a').get_attribute('href')
+
+                    # reservada
+                    reservada = False
+
+                    # try:
+                    #     reservada_element = e.find_element(By.CLASS_NAME, 'reserved')
+                    #     if (reservada_element is not None):
+                    #         reservada = True
+                    # except NoSuchElementException:
+                    #     reservada = False
+
+                    res = '{}#@#@#{}#@#@#{}#@#@#{}#@#@#{}#@#@#{}'.format(titulo,precio, property.replace("\n"," "),
+                                                                                                               enlace,
+                                                                                                               str(reservada),image)
+
+                    if (res not in lineas):
+                        await send_message(res, 'coches')
+
+                except NoSuchElementException as ex:
+                    pass
+                    # print(f"Error: no se encontró el elemento. Detalles: {ex}")
+                except TimeoutException as ex:
+                    print(f"Error: se superó el tiempo de espera. Detalles: {ex}")
+                except Exception as ex:
+                    print(f"Error inesperado. Detalles: {ex}")
+
+                # except:
+                #     pass
+
+async def mila_check():
+
+    filters = []
+    with open("filters_mila.txt", "r") as archivo_fil:
+        filters = archivo_fil.readlines()
+        filters = [fl.rstrip("\n") for fl in filters]
+
+    for fls in filters:
+
+        if (driver_alt.current_url == fls):
+            driver_alt.quit()
+
+        sleep(1)
+
+        driver_alt.get(fls)
+
+        sleep(1)
+
+        try:
+            wait = WebDriverWait(driver_alt, 2)
+            element = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'sui-MoleculeModal-dialog')))
+            sleep(1)
+            cerrar_btn = element.find_element(By.XPATH,
+                                              '//button[@class="sui-AtomButton sui-AtomButton--primary sui-AtomButton--solid sui-AtomButton--center "]')
+            cerrar_btn.click()
+            sleep(2)
+        except:
+            pass
+
+
+        # submitBtn = driver_alt.find_element(By.CLASS_NAME, 'sui-AtomButton')
+        # submitBtn.click()
+
+        #OBTENEMOS LOS COCHES YA ENVIADOS
+        lineas = []
+        with open("mila_encontrados.txt", "r") as archivo:
+            lineas = archivo.readlines()
+            lineas = [linea.rstrip("\n") for linea in lineas]
+
+
+        for i in range(20):
+            sleep(0.2)
+            driver_alt.execute_script("window.scrollBy(0, 600)")
+
+        sleep(3)
+
+        cards = driver_alt.find_elements(By.CLASS_NAME, 'ma-AdCardV2')
+        if (cards is not None):
+            logging.info('MILANUNCIOS | encontrados: ')
+            print('MILANUNCIOS | encontrados: ')
+            for e in cards:
+                try:
+                    precio = e.find_element(By.CLASS_NAME, 'ma-AdPrice-value').text
+                    titulo = e.find_element(By.CLASS_NAME, 'ma-AdCardV2-row').text
+                    property = e.find_element(By.XPATH,
+                                              './/div[@class="ma-AdCardV2-row ma-AdCardV2-row--margin12 ma-AdCardV2-row--wrap"]').text
+                    # property = e.find_elements(By.CSS_SELECTOR, '.ma-AdCardV2-row.ma-AdCardV2-row--margin12.ma-AdCardV2-row--wrap').text
+                    image = e.find_element(By.TAG_NAME, 'img').get_attribute('src')
+                    enlace = e.find_element(By.CLASS_NAME, 'ma-AdCardListingV2-TitleLink').get_attribute('href')
+
+                    location = e.find_element(By.XPATH, './/span[@class="ma-SharedText ma-AdLocation-text ma-AdLocation-text--isCardListingLocation ma-SharedText--s ma-SharedText--gray"]').text
+
+                    if ('(Madrid)' not in location):
+                        break
+
+                    # reservada
+                    reservada = False
+
+                    # try:
+                    #     reservada_element = e.find_element(By.CLASS_NAME, 'reserved')
+                    #     if (reservada_element is not None):
+                    #         reservada = True
+                    # except NoSuchElementException:
+                    #     reservada = False
+
+                    res = '{}#@#@#{}#@#@#{}#@#@#{}#@#@#{}#@#@#{}'.format(titulo,precio, property.replace("\n"," "),
+                                                                                                               enlace,
+                                                                                                               str(reservada),image)
+
+                    if (res not in lineas):
+                        await send_message(res, 'mila')
+
+                except NoSuchElementException as ex:
+                    # pass
+                    print(f"Error: no se encontró el elemento. Detalles: {ex}")
+                except TimeoutException as ex:
+                    print(f"Error: se superó el tiempo de espera. Detalles: {ex}")
+                except Exception as ex:
+                    print(f"Error inesperado. Detalles: {ex}")
+                # except:
+                #     pass
 
 async def main():
     validate_wall_cookies()
     validate_coches_cookies()
     while (True):
         await wallapop_check()
-        print('Esperando 3 minutos para volver a buscar...')
-        sleep(180)
+        await coches_check()
+        await mila_check()
+        print('Esperando 6 minutos para volver a buscar...')
+        sleep(360)
     driver.quit()
 
 
 if __name__ == '__main__':
     logging.info('Iniciando el bot...')
+    print('Iniciando el bot...')
     asyncio.run(main())
 
 
