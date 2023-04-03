@@ -41,6 +41,7 @@ driver = webdriver.Chrome(options=chrome_options)
 ## ALTERNATIVO
 uc.TARGET_VERSION = 85
 driver_atl_options = uc.ChromeOptions()
+driver_atl_options.binary_location = r'C:\Users\velcas\Downloads\chrome-win\chrome-win\chrome.exe'
 driver_atl_options.add_argument('--headless')
 driver_alt = uc.Chrome(options=driver_atl_options)
 
@@ -93,7 +94,7 @@ async def send_message(txt, platform):
         await bot.send_message('393154264', text, parse_mode='HTML', reply_markup=reply_markup)
 
         ##PP
-        await bot.send_message('5875517685', text, parse_mode='HTML', reply_markup=reply_markup)
+        # await bot.send_message('5875517685', text, parse_mode='HTML', reply_markup=reply_markup)
 
     except Exception as e:
         debug_log_info(e)
@@ -394,7 +395,7 @@ async def search_cars():
     validate_wall_cookies()
     validate_coches_cookies()
     while (True):
-        # await wallapop_check()
+        await wallapop_check()
         await coches_check()
         await mila_check()
         debug_log_info('Esperando 6 minutos para volver a buscar...')
@@ -408,7 +409,7 @@ def run_async_in_thread():
 
 
 def debug_log_info(txt):
-    print(txt)
+    # print(txt)
     logging.info(txt)
 
 
