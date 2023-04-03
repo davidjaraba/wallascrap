@@ -11,6 +11,7 @@ from telegram import Bot,InlineKeyboardButton, InlineKeyboardMarkup
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import undetected_chromedriver as uc
 
 # OFFERS_URL ='https://es.wallapop.com/app/search?latitude=40.32432432432432&longitude=-3.781357301971911&category_ids=100&min_sale_price=1000&max_sale_price=6000&distance=100000&order_by=newest&country_code=ES&gearbox=manual&min_km=10000&max_km=170000&min_year=2005&favorite_search_id=532e4c05-2929-48bd-a97c-99ca18cd0c64&filters_source=stored_filters'
 
@@ -29,6 +30,9 @@ chrome_options.add_argument('--window-size=1920,1080')
 # Crea una instancia de webdriver con las opciones de Chrome
 driver = webdriver.Chrome(options=chrome_options)
 
+## ALTERNATIVO
+uc.TARGET_VERSION = 85
+driver_alt = uc.Chrome()
 
 
 # conecto al bot de telegram
@@ -54,10 +58,10 @@ async def send_message(txt):
         text = "<b>{}</b> \nPrecio: {}\n{}\n<a href='{}'>>></a>".format(txtList[0],txtList[1], txtList[2],txtList[5])
 
         ##MIO
-        await bot.send_message('393154264', text, parse_mode='HTML', reply_markup=reply_markup)
+        # await bot.send_message('393154264', text, parse_mode='HTML', reply_markup=reply_markup)
 
         ##PP
-        await bot.send_message('5875517685', text, parse_mode='HTML', reply_markup=reply_markup)
+        # await bot.send_message('5875517685', text, parse_mode='HTML', reply_markup=reply_markup)
 
     except Exception as e:
         logging.error(e)
@@ -76,6 +80,22 @@ def validate_wall_cookies():
         cerrar_btn.click()
     except TimeoutException:
         print('no hay cons')
+
+def validate_coches_cookies():
+    try:
+        print('coches')
+        ## ACCEDER A COCHES.NET SIN SER BLOQUEADO
+        driver_alt.get('https://coches.net')
+
+        # Esperar a que aparezca el mensaje de consentimiento
+        wait = WebDriverWait(driver_alt, 2)
+        element = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'sui-MoleculeModal-dialog')))
+        sleep(1)
+        cerrar_btn = element.find_element(By.XPATH, '//button[@class="sui-AtomButton sui-AtomButton--primary sui-AtomButton--solid sui-AtomButton--center"]')
+        cerrar_btn.click()
+    except TimeoutException:
+        print('no hay cons')
+
 
 
 async def wallapop_check():
@@ -171,6 +191,7 @@ async def wallapop_check():
 
 async def main():
     validate_wall_cookies()
+    validate_coches_cookies()
     while (True):
         await wallapop_check()
         print('Esperando 3 minutos para volver a buscar...')
