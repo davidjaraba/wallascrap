@@ -8,6 +8,7 @@ setup_args = dict(
     py_modules=['main'],
     install_requires=[
         'telegram',
-        'selenium'
+        'selenium',
+        'undetected_chromedriver'
     ]
 )

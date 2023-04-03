@@ -1,6 +1,10 @@
-import logging
 import asyncio
+import os
+import threading
 import telegram
+import logging
+import tracemalloc
+from telegram.ext import Updater, CommandHandler
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from time import sleep
@@ -12,6 +16,10 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import undetected_chromedriver as uc
+
+## RECOLECTOR DE BASURA
+tracemalloc.start()
+
 
 # OFFERS_URL ='https://es.wallapop.com/app/search?latitude=40.32432432432432&longitude=-3.781357301971911&category_ids=100&min_sale_price=1000&max_sale_price=6000&distance=100000&order_by=newest&country_code=ES&gearbox=manual&min_km=10000&max_km=170000&min_year=2005&favorite_search_id=532e4c05-2929-48bd-a97c-99ca18cd0c64&filters_source=stored_filters'
 
@@ -40,10 +48,24 @@ driver_alt = uc.Chrome(options=driver_atl_options)
 
 # conecto al bot de telegram
 bot = telegram.Bot(token=TOKEN)
+updater = Updater("6267117945:AAGmojNJIm1EvnRlq7x3r8uYmio-sMKigJI", use_context=True)
+
+logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', level=logging.INFO)
+
+def start(update, context):
+    context.bot.send_message(chat_id=update.effective_chat.id, text="¡Hola! ¡Bienvenido al CARS SCRAP BOT!")
+
+def check(update, context):
+    context.bot.send_message(chat_id=update.effective_chat.id, text="FUNCIONANDO :D")
+
+def stop(update, context):
+    context.bot.send_message(chat_id=update.effective_chat.id, text="PARANDO EL BOT")
+    os._exit(0)
+
 sleep(1)
 
 async def send_message(txt, platform):
-    print(txt)
+    debug_log_info(txt)
     with open(platform+"_encontrados.txt", "a") as archivo:
         archivo.write("\n"+txt)
     try:
@@ -65,16 +87,16 @@ async def send_message(txt, platform):
         elif (platform == 'mila'):
             platformStr = 'MILANUNCIOS'
 
-        text = "<em>{}</em>\n<strong>{}</strong> \n<b>Precio: {}</b>\n{}\n<a href='{}'>>></a>".format(platformStr,txtList[0],txtList[1], txtList[2],txtList[5])
+        text = "<em>{}</em>\n<strong>{}</strong> \n<b>Precio: {}</b>\n{}\n<a href='{}'>_</a>".format(platformStr,txtList[0],txtList[1], txtList[2],txtList[5])
 
         ##MIO
         await bot.send_message('393154264', text, parse_mode='HTML', reply_markup=reply_markup)
 
         ##PP
-        # await bot.send_message('5875517685', text, parse_mode='HTML', reply_markup=reply_markup)
+        await bot.send_message('5875517685', text, parse_mode='HTML', reply_markup=reply_markup)
 
     except Exception as e:
-        logging.error(e)
+        debug_log_info(e)
 
 
 def validate_wall_cookies():
@@ -89,11 +111,10 @@ def validate_wall_cookies():
         cerrar_btn = driver.find_element(By.ID, 'onetrust-accept-btn-handler')
         cerrar_btn.click()
     except TimeoutException:
-        print('no hay cons')
+        debug_log_info('no hay cons')
 
 def validate_coches_cookies():
     try:
-        print('coches')
         ## ACCEDER A COCHES.NET SIN SER BLOQUEADO
         driver_alt.get('https://coches.net')
 
@@ -105,7 +126,7 @@ def validate_coches_cookies():
         cerrar_btn.click()
         sleep(2)
     except TimeoutException:
-        print('no hay cons')
+        debug_log_info('no hay cons')
 
 
 async def wallapop_check():
@@ -137,7 +158,7 @@ async def wallapop_check():
 
         cards = driver.find_elements(By.CLASS_NAME, 'ItemCardList__item')
         if (cards is not None):
-            print('WALLAPOP | Encontrados: ')
+            debug_log_info('WALLAPOP | Encontrados: ')
             for e in cards:
                 try:
 
@@ -191,11 +212,11 @@ async def wallapop_check():
                         await send_message(res, 'wallapop')
 
                 except NoSuchElementException as ex:
-                    print(f"Error: no se encontró el elemento. Detalles: {ex}")
+                    debug_log_info(f"Error: no se encontró el elemento. Detalles: {ex}")
                 except TimeoutException as ex:
-                    print(f"Error: se superó el tiempo de espera. Detalles: {ex}")
+                    debug_log_info(f"Error: se superó el tiempo de espera. Detalles: {ex}")
                 except Exception as ex:
-                    print(f"Error inesperado. Detalles: {ex}")
+                    debug_log_info(f"Error inesperado. Detalles: {ex}")
 
                 # except:
                 #     pass
@@ -226,8 +247,7 @@ async def coches_check():
 
         cards = driver_alt.find_elements(By.CLASS_NAME, 'sui-AtomCard')
         if (cards is not None):
-            logging.info('CochesNET | encontrados: ')
-            print('CochesNET | encontrados: ')
+            debug_log_info('CochesNET | encontrados: ')
             for e in cards:
                 try:
 
@@ -258,12 +278,11 @@ async def coches_check():
                     pass
                     # print(f"Error: no se encontró el elemento. Detalles: {ex}")
                 except TimeoutException as ex:
-                    print(f"Error: se superó el tiempo de espera. Detalles: {ex}")
+                    debug_log_info(f"Error: se superó el tiempo de espera. Detalles: {ex}")
                 except Exception as ex:
-                    print(f"Error inesperado. Detalles: {ex}")
-
-                # except:
-                #     pass
+                    debug_log_info(f"Error inesperado. Detalles: {ex}")
+                except:
+                    pass
 
 async def mila_check():
 
@@ -313,8 +332,7 @@ async def mila_check():
 
         cards = driver_alt.find_elements(By.CLASS_NAME, 'ma-AdCardV2')
         if (cards is not None):
-            logging.info('MILANUNCIOS | encontrados: ')
-            print('MILANUNCIOS | encontrados: ')
+            debug_log_info('MILANUNCIOS | encontrados: ')
             for e in cards:
                 try:
                     precio = e.find_element(By.CLASS_NAME, 'ma-AdPrice-value').text
@@ -349,30 +367,57 @@ async def mila_check():
 
                 except NoSuchElementException as ex:
                     # pass
-                    print(f"Error: no se encontró el elemento. Detalles: {ex}")
+                    debug_log_info(f"Error: no se encontró el elemento. Detalles: {ex}")
                 except TimeoutException as ex:
-                    print(f"Error: se superó el tiempo de espera. Detalles: {ex}")
+                    debug_log_info(f"Error: se superó el tiempo de espera. Detalles: {ex}")
                 except Exception as ex:
-                    print(f"Error inesperado. Detalles: {ex}")
+                    debug_log_info(f"Error inesperado. Detalles: {ex}")
                 # except:
                 #     pass
 
-async def main():
+
+def start_bot_async():
+    updater.start_polling()
+    updater.idle()
+
+def start_bot():
+    start_handler = CommandHandler('start', start)
+    check_handler = CommandHandler('check', check)
+    stop_handler = CommandHandler('stop', stop)
+    updater.dispatcher.add_handler(start_handler)
+    updater.dispatcher.add_handler(check_handler)
+    updater.dispatcher.add_handler(stop_handler)
+
+
+async def search_cars():
+    debug_log_info('Buscando coches...')
     validate_wall_cookies()
     validate_coches_cookies()
     while (True):
-        await wallapop_check()
+        # await wallapop_check()
         await coches_check()
         await mila_check()
-        print('Esperando 6 minutos para volver a buscar...')
+        debug_log_info('Esperando 6 minutos para volver a buscar...')
         sleep(360)
     driver.quit()
 
+def run_async_in_thread():
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+    loop.run_until_complete(search_cars())
+
+
+def debug_log_info(txt):
+    print(txt)
+    logging.info(txt)
+
 
 if __name__ == '__main__':
-    logging.info('Iniciando el bot...')
-    print('Iniciando el bot...')
-    asyncio.run(main())
+    debug_log_info('Iniciando el bot...')
+    start_bot()
+    t = threading.Thread(target=run_async_in_thread)
+    t.start()
+    start_bot_async()
 
 
 

@@ -1,0 +1,163 @@
+2023-04-03 21:47:52,338 - root - INFO - Iniciando el bot...
+2023-04-03 21:47:52,339 - apscheduler.scheduler - INFO - Scheduler started
+2023-04-03 21:47:52,341 - root - INFO - Buscando coches...
+2023-04-03 21:48:07,327 - root - INFO - CochesNET | encontrados: 
+2023-04-03 21:48:15,880 - root - INFO - CochesNET | encontrados: 
+2023-04-03 21:48:25,410 - root - INFO - CochesNET | encontrados: 
+2023-04-03 21:48:33,726 - root - INFO - CochesNET | encontrados: 
+2023-04-03 21:48:33,800 - root - INFO - VOLKSWAGEN Polo 1.6 TDI 90cv Advance#@#@#6.500 €#@#@#Madrid Diesel 2010 143.900 km#@#@#https://www.coches.net/volkswagen-polo-16-tdi-90cv-advance-diesel-2010-en-madrid-54762017-covo.aspx#@#@#False#@#@#https://a.ccdn.es/cnet/2023/03/31/54762017/658918059_g.jpg/252x189cut/
+2023-04-03 21:48:34,051 - root - INFO - object Message can't be used in 'await' expression
+2023-04-03 21:48:34,126 - root - INFO - VOLKSWAGEN Polo 1.6 TDI 90cv Sport 3p.#@#@#7.000 €#@#@#Madrid Diesel 2011 140.000 km#@#@#https://www.coches.net/volkswagen-polo-16-tdi-90cv-sport-3p-diesel-#a%C3%B1o#-en-madrid-54681213-covo.aspx#@#@#False#@#@#https://a.ccdn.es/cnet/2023/03/22/54681213/657013916_g.jpg/252x189cut/
+2023-04-03 21:48:34,302 - root - INFO - object Message can't be used in 'await' expression
+2023-04-03 21:48:42,368 - root - INFO - CochesNET | encontrados: 
+2023-04-03 21:48:50,539 - root - INFO - CochesNET | encontrados: 
+2023-04-03 21:48:58,634 - root - INFO - CochesNET | encontrados: 
+2023-04-03 21:48:58,717 - root - INFO - HONDA Civic 2.2 iCTDi Sport 5p.#@#@#6.500 €#@#@#Madrid Diesel 2009 150.000 km#@#@#https://www.coches.net/honda-civic-22-ictdi-sport-5p-diesel-2009-en-malaga-53747065-covo.aspx#@#@#False#@#@#https://a.ccdn.es/cnet/2022/12/14/53747065/634075166_g.jpg/252x189cut/
+2023-04-03 21:48:58,825 - root - INFO - object Message can't be used in 'await' expression
+2023-04-03 21:49:06,864 - root - INFO - CochesNET | encontrados: 
+2023-04-03 21:49:06,934 - root - INFO - TOYOTA Auris 1.4 D4D DPF Live 5p.#@#@#6.900 €#@#@#Madrid Diesel 2010 150.000 km#@#@#https://www.coches.net/toyota-auris-14-d4d-dpf-live-diesel-2010-en-madrid-54486725-covo.aspx#@#@#False#@#@#https://a.ccdn.es/cnet/2023/03/01/54486725/653197065_g.jpg/252x189cut/
+2023-04-03 21:49:07,053 - root - INFO - object Message can't be used in 'await' expression
+2023-04-03 21:49:07,133 - root - INFO - TOYOTA Auris 2.0 D4D Luna#@#@#5.999 €#@#@#Madrid Diesel 2009 155.000 km#@#@#https://www.coches.net/toyota-auris-20-d4d-luna-diesel-2009-en-madrid-54644232-covo.aspx#@#@#False#@#@#https://a.ccdn.es/cnet/2023/03/18/54644232/656352198_g.jpg/252x189cut/
+2023-04-03 21:49:07,226 - root - INFO - object Message can't be used in 'await' expression
+2023-04-03 21:49:07,301 - root - INFO - TOYOTA Auris 1.4 D4D DPF Active#@#@#6.990 €#@#@#Madrid Diesel 2011 135.000 km#@#@#https://www.coches.net/toyota-auris-14-d4d-dpf-active-diesel-2011-en-madrid-54594474-covo.aspx#@#@#False#@#@#https://a.ccdn.es/cnet/2023/03/13/54594474/655296959_g.jpg/252x189cut/
+2023-04-03 21:49:07,402 - root - INFO - object Message can't be used in 'await' expression
+2023-04-03 21:49:07,473 - root - INFO - TOYOTA Auris 1.4 D4D DPF Active 5p.#@#@#7.000 €#@#@#Madrid Diesel 2010 125.000 km#@#@#https://www.coches.net/toyota-auris-14-d4d-dpf-active-5p-diesel-2010-en-madrid-54233141-covo.aspx#@#@#False#@#@#https://a.ccdn.es/cnet/2023/02/03/54233141/647512125_g.jpg/252x189cut/
+2023-04-03 21:49:07,569 - root - INFO - object Message can't be used in 'await' expression
+2023-04-03 21:49:21,558 - root - INFO - MILANUNCIOS | encontrados: 
+2023-04-03 21:49:21,668 - root - INFO - HYUNDAI - I30 1.6 CRDI GLS FDU COMFORT WGT 6V#@#@#6.590 €#@#@#127.284 kms 2011 Diesel#@#@#https://www.milanuncios.com/hyundai-de-segunda-mano/hyundai-i30-1-6-crdi-gls-fdu-comfort-wgt-6v-481175749.htm#@#@#False#@#@#https://images.milanuncios.com/api/v1/ma-ad-media-pro/images/9c091471-ccfb-45db-a925-ea77548433dc?rule=hw396_70
+2023-04-03 21:49:21,758 - root - INFO - object Message can't be used in 'await' expression
+2023-04-03 21:49:35,042 - root - INFO - MILANUNCIOS | encontrados: 
+2023-04-03 21:49:35,138 - root - INFO - SEAT - IBIZA#@#@#6.200 €#@#@#130.000 kms 2014 Diesel#@#@#https://www.milanuncios.com/seat-de-segunda-mano/seat-ibiza-473144257.htm#@#@#False#@#@#https://images.milanuncios.com/api/v1/ma-ad-media-pro/images/312dc763-d368-4d9d-aa19-44603e19a9c9?rule=hw396_70
+2023-04-03 21:49:35,251 - root - INFO - object Message can't be used in 'await' expression
+2023-04-03 21:49:35,347 - root - INFO - SEAT - IBIZA ST 1.6 TDI 105CV STYLE DPF#@#@#5.800 €#@#@#148.000 kms 2011 Diesel#@#@#https://www.milanuncios.com/seat-de-segunda-mano/seat-ibiza-st-1-6-tdi-105cv-style-dpf-482430701.htm#@#@#False#@#@#https://images.milanuncios.com/api/v1/ma-ad-media-pro/images/487648ef-f152-4a6f-b591-746f3061748a?rule=hw396_70
+2023-04-03 21:49:35,452 - root - INFO - object Message can't be used in 'await' expression
+2023-04-03 21:49:35,551 - root - INFO - SEAT - IBIZA SC 1.6 TDI 90CV REFERENCE DPF#@#@#5.990 €#@#@#125.000 kms 2011 Diesel#@#@#https://www.milanuncios.com/seat-de-segunda-mano/seat-ibiza-sc-1-6-tdi-90cv-reference-dpf-481390703.htm#@#@#False#@#@#https://images.milanuncios.com/api/v1/ma-ad-media-pro/images/bc54ef3b-61b8-45a6-a309-4b066b9338d9?rule=hw396_70
+2023-04-03 21:49:35,679 - root - INFO - object Message can't be used in 'await' expression
+2023-04-03 21:49:35,778 - root - INFO - SEAT - IBIZA SC 1.6 TDI 105CV STYLE DPF#@#@#6.790 €#@#@#100.000 kms 2011 Diesel#@#@#https://www.milanuncios.com/seat-de-segunda-mano/seat-ibiza-sc-1-6-tdi-105cv-style-dpf-481899147.htm#@#@#False#@#@#https://images.milanuncios.com/api/v1/ma-ad-media-pro/images/fe805629-149a-46aa-9e66-b024c3613b33?rule=hw396_70
+2023-04-03 21:49:35,937 - root - INFO - object Message can't be used in 'await' expression
+2023-04-03 21:49:36,031 - root - INFO - SEAT - IBIZA 1.6 TDI 105CV STYLE#@#@#6.499 €#@#@#143.000 kms 2014 Diesel#@#@#https://www.milanuncios.com/seat-de-segunda-mano/seat-ibiza-1-6-tdi-105cv-style-478810681.htm#@#@#False#@#@#https://images.milanuncios.com/api/v1/ma-ad-media-pro/images/2ac6af63-8fec-436b-b4cc-a1357bb0914b?rule=hw396_70
+2023-04-03 21:49:36,140 - root - INFO - object Message can't be used in 'await' expression
+2023-04-03 21:49:36,240 - root - INFO - SEAT - IBIZA SC 1.6 TDI 105CV STYLE DPF#@#@#6.450 €#@#@#135.000 kms 2011 Diesel#@#@#https://www.milanuncios.com/seat-de-segunda-mano/seat-ibiza-sc-1-6-tdi-105cv-style-dpf-478597611.htm#@#@#False#@#@#https://images.milanuncios.com/api/v1/ma-ad-media-pro/images/0657a637-6f68-44fb-9ae0-a2a38662aac4?rule=hw396_70
+2023-04-03 21:49:36,361 - root - INFO - object Message can't be used in 'await' expression
+2023-04-03 21:49:36,460 - root - INFO - SEAT - IBIZA SC 1.6 TDI 90CV COPA REFERENCE DPF#@#@#6.498 €#@#@#136.000 kms 2011 Diesel#@#@#https://www.milanuncios.com/seat-de-segunda-mano/seat-ibiza-sc-1-6-tdi-90cv-copa-reference-dpf-449121396.htm#@#@#False#@#@#https://images.milanuncios.com/api/v1/ma-ad-media-pro/images/31599425-2729-4cc6-9888-94686a52cb60?rule=hw396_70
+2023-04-03 21:49:36,558 - root - INFO - object Message can't be used in 'await' expression
+2023-04-03 21:49:49,649 - root - INFO - MILANUNCIOS | encontrados: 
+2023-04-03 21:49:49,745 - root - INFO - SEAT - LEON 1.6 TDI 110CV DSG7 STSP STYLE#@#@#5.300 €#@#@#95.000 kms 2016 Diesel#@#@#https://www.milanuncios.com/seat-de-segunda-mano/seat-leon-1-6-tdi-110cv-dsg7-stsp-style-478392958.htm#@#@#False#@#@#https://images.milanuncios.com/api/v1/ma-ad-media-pro/images/97a31493-e6cb-4c66-8383-ae816678b8bb?rule=hw396_70
+2023-04-03 21:49:49,916 - root - INFO - object Message can't be used in 'await' expression
+2023-04-03 21:49:50,016 - root - INFO - SEAT - LEON 1.6 TDI 110CV STSP STYLE CONNECT BL PL#@#@#6.400 €#@#@#134.000 kms 2016 Diesel#@#@#https://www.milanuncios.com/seat-de-segunda-mano/seat-leon-1-6-tdi-110cv-stsp-style-connect-bl-pl-465680032.htm#@#@#False#@#@#https://images.milanuncios.com/api/v1/ma-ad-media-pro/images/f58b82c8-7f5d-4345-ad75-bb04c65d4187?rule=hw396_70
+2023-04-03 21:49:50,263 - root - INFO - object Message can't be used in 'await' expression
+2023-04-03 21:49:50,359 - root - INFO - SEAT - LEON 1.6 TDI 90CV REFERENCE COPA#@#@#5.990 €#@#@#142.947 kms 2011 Diesel#@#@#https://www.milanuncios.com/seat-de-segunda-mano/seat-leon-1-6-tdi-90cv-reference-copa-309326486.htm#@#@#False#@#@#https://images.milanuncios.com/api/v1/ma-ad-media-pro/images/4cf9a842-eb84-4449-ba0c-5fa8ce0fd847?rule=hw396_70
+2023-04-03 21:49:50,475 - root - INFO - object Message can't be used in 'await' expression
+2023-04-03 21:50:03,283 - root - INFO - MILANUNCIOS | encontrados: 
+2023-04-03 21:50:16,186 - root - INFO - MILANUNCIOS | encontrados: 
+2023-04-03 21:50:16,299 - root - INFO - TOYOTA - AURIS 90D ACTIVE TOURING SPORTS#@#@#4.700 €#@#@#150.000 kms 2014 Diesel#@#@#https://www.milanuncios.com/toyota-de-segunda-mano/toyota-auris-90d-active-touring-sports-481254753.htm#@#@#False#@#@#https://images.milanuncios.com/api/v1/ma-ad-media-pro/images/c8fa67ad-a973-44b4-8308-14a6def850ff?rule=hw396_70
+2023-04-03 21:50:16,439 - root - INFO - object Message can't be used in 'await' expression
+2023-04-03 21:50:16,552 - root - INFO - TOYOTA - AURIS 1.4 D4D DPF ACTIVE#@#@#6.990 €#@#@#135.000 kms 2011 Diesel#@#@#https://www.milanuncios.com/toyota-de-segunda-mano/toyota-auris-1-4-d4d-dpf-active-480089017.htm#@#@#False#@#@#https://images.milanuncios.com/api/v1/ma-ad-media-pro/images/2aae00c3-a923-4d3f-8a97-4c043a2c62f1?rule=hw396_70
+2023-04-03 21:50:16,650 - root - INFO - object Message can't be used in 'await' expression
+2023-04-03 21:50:16,758 - root - INFO - TOYOTA - AURIS 1.4 D4D DPF LIVE#@#@#6.900 €#@#@#150.000 kms 2010 Diesel#@#@#https://www.milanuncios.com/toyota-de-segunda-mano/toyota-auris-1-4-d4d-dpf-live-479154901.htm#@#@#False#@#@#https://images.milanuncios.com/api/v1/ma-ad-media-pro/images/bcb5b14b-1adb-4c11-91a1-d0460dbfa1e0?rule=hw396_70
+2023-04-03 21:50:16,874 - root - INFO - object Message can't be used in 'await' expression
+2023-04-03 21:50:16,968 - root - INFO - TOYOTA - AURIS 1.4 90D FEEL#@#@#6.900 €#@#@#115.000 kms 2017 Diesel#@#@#https://www.milanuncios.com/toyota-de-segunda-mano/toyota-auris-1-4-90d-feel-479129141.htm#@#@#False#@#@#https://images.milanuncios.com/api/v1/ma-ad-media-pro/images/0a6ae6d9-30af-496c-9912-2df0a648fdbf?rule=hw396_70
+2023-04-03 21:50:17,073 - root - INFO - object Message can't be used in 'await' expression
+2023-04-03 21:50:17,171 - root - INFO - TOYOTA - AURIS#@#@#5.600 €#@#@#150.000 kms 2013 Diesel#@#@#https://www.milanuncios.com/toyota-de-segunda-mano/toyota-auris-477790707.htm#@#@#False#@#@#https://images.milanuncios.com/api/v1/ma-ad-media-pro/images/af0c639f-eb43-4794-a17d-8f59b602c8ee?rule=hw396_70
+2023-04-03 21:50:17,261 - root - INFO - object Message can't be used in 'await' expression
+2023-04-03 21:50:17,363 - root - INFO - TOYOTA - AURIS#@#@#7.000 €#@#@#125.000 kms 2010 Diesel#@#@#https://www.milanuncios.com/toyota-de-segunda-mano/toyota-auris-476670463.htm#@#@#False#@#@#https://images.milanuncios.com/api/v1/ma-ad-media-pro/images/1b9f6610-1886-4688-b986-003f7ee5d108?rule=hw396_70
+2023-04-03 21:50:17,499 - root - INFO - object Message can't be used in 'await' expression
+2023-04-03 21:50:17,593 - root - INFO - TOYOTA - AURIS#@#@#5.600 €#@#@#150.000 kms 2013 Diesel#@#@#https://www.milanuncios.com/toyota-de-segunda-mano/toyota-auris-477230483.htm#@#@#False#@#@#https://images.milanuncios.com/api/v1/ma-ad-media-pro/images/7c33a569-64a2-449b-adc7-3df8123775e6?rule=hw396_70
+2023-04-03 21:50:17,691 - root - INFO - object Message can't be used in 'await' expression
+2023-04-03 21:50:30,767 - root - INFO - MILANUNCIOS | encontrados: 
+2023-04-03 21:50:30,867 - root - INFO - VOLKSWAGEN - POLO#@#@#5.250 €#@#@#139.200 kms 2009 Diesel#@#@#https://www.milanuncios.com/volkswagen-de-segunda-mano/volkswagen-polo-482533478.htm#@#@#False#@#@#https://images.milanuncios.com/api/v1/ma-ad-media-pro/images/1486f9c0-9f8d-4ca6-b8b3-58a60a26a8ce?rule=hw396_70
+2023-04-03 21:50:31,117 - root - INFO - object Message can't be used in 'await' expression
+2023-04-03 21:50:31,210 - root - INFO - VOLKSWAGEN - POLO#@#@#6.950 €#@#@#126.000 kms 2009 Diesel#@#@#https://www.milanuncios.com/volkswagen-de-segunda-mano/volkswagen-polo-481880622.htm#@#@#False#@#@#https://images.milanuncios.com/api/v1/ma-ad-media-pro/images/f7c0e221-20d4-4732-878b-9c75dceac172?rule=hw396_70
+2023-04-03 21:50:31,374 - root - INFO - object Message can't be used in 'await' expression
+2023-04-03 21:50:31,470 - root - INFO - VOLKSWAGEN - POLO#@#@#5.500 €#@#@#150.000 kms 2010 Diesel#@#@#https://www.milanuncios.com/volkswagen-de-segunda-mano/volkswagen-polo-479014342.htm#@#@#False#@#@#https://images.milanuncios.com/api/v1/ma-ad-media-pro/images/50eb1d95-4620-4d08-b6d9-8d04c2db8a60?rule=hw396_70
+2023-04-03 21:50:31,670 - root - INFO - object Message can't be used in 'await' expression
+2023-04-03 21:50:31,786 - root - INFO - VOLKSWAGEN - POLO 1.6 TDI 90CV ADVANCE#@#@#6.500 €#@#@#143.900 kms 2010 Diesel#@#@#https://www.milanuncios.com/volkswagen-de-segunda-mano/volkswagen-polo-1-6-tdi-90cv-advance-482364281.htm#@#@#False#@#@#https://images.milanuncios.com/api/v1/ma-ad-media-pro/images/ef63fe83-c747-45b7-a42c-293547203f0a?rule=hw396_70
+2023-04-03 21:50:31,965 - root - INFO - object Message can't be used in 'await' expression
+2023-04-03 21:50:32,063 - root - INFO - VOLKSWAGEN - POLO#@#@#6.500 €#@#@#130.000 kms 2012 Diesel#@#@#https://www.milanuncios.com/volkswagen-de-segunda-mano/volkswagen-polo-482222244.htm#@#@#False#@#@#https://images.milanuncios.com/api/v1/ma-ad-media-pro/images/bc91f6f8-1dbb-4f27-ba44-4e940657522a?rule=hw396_70
+2023-04-03 21:50:32,233 - root - INFO - object Message can't be used in 'await' expression
+2023-04-03 21:50:32,330 - root - INFO - VOLKSWAGEN - POLO 1.2 TDI 75CV ADVANCE#@#@#3.800 €#@#@#140.000 kms 2011 Diesel#@#@#https://www.milanuncios.com/volkswagen-de-segunda-mano/volkswagen-polo-1-2-tdi-75cv-advance-480134822.htm#@#@#False#@#@#https://images.milanuncios.com/api/v1/ma-ad-media-pro/images/496d60d0-2661-4762-92f5-0dd8a594dee3?rule=hw396_70
+2023-04-03 21:50:32,440 - root - INFO - object Message can't be used in 'await' expression
+2023-04-03 21:50:32,506 - root - INFO - Error: no se encontró el elemento. Detalles: Message: no such element: Unable to locate element: {"method":"tag name","selector":"img"}
+  (Session info: chrome=111.0.5563.147)
+Stacktrace:
+Backtrace:
+	(No symbol) [0x0102DCE3]
+	(No symbol) [0x00FC39D1]
+	(No symbol) [0x00ED4DA8]
+	(No symbol) [0x00F0019F]
+	(No symbol) [0x00F003AB]
+	(No symbol) [0x00EF87D1]
+	(No symbol) [0x00F1AF14]
+	(No symbol) [0x00EF8726]
+	(No symbol) [0x00F1B224]
+	(No symbol) [0x00F2D57C]
+	(No symbol) [0x00F1ACC6]
+	(No symbol) [0x00EF6F68]
+	(No symbol) [0x00EF80CD]
+	GetHandleVerifier [0x012A3832+2506274]
+	GetHandleVerifier [0x012D9794+2727300]
+	GetHandleVerifier [0x012DE36C+2746716]
+	GetHandleVerifier [0x010D6690+617600]
+	(No symbol) [0x00FCC712]
+	(No symbol) [0x00FD1FF8]
+	(No symbol) [0x00FD20DB]
+	(No symbol) [0x00FDC63B]
+	BaseThreadInitThunk [0x75C17D49+25]
+	RtlInitializeExceptionChain [0x7753B74B+107]
+	RtlClearBits [0x7753B6CF+191]
+
+2023-04-03 21:50:41,985 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2023-04-03 21:50:41,985 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2023-04-03 21:51:52,878 - root - INFO - Iniciando el bot...
+2023-04-03 21:51:52,879 - apscheduler.scheduler - INFO - Scheduler started
+2023-04-03 21:51:52,881 - root - INFO - Buscando coches...
+2023-04-03 21:52:07,498 - root - INFO - CochesNET | encontrados: 
+2023-04-03 21:52:15,895 - root - INFO - CochesNET | encontrados: 
+2023-04-03 21:52:25,298 - root - INFO - CochesNET | encontrados: 
+2023-04-03 21:52:33,540 - root - INFO - CochesNET | encontrados: 
+2023-04-03 21:52:42,137 - root - INFO - CochesNET | encontrados: 
+2023-04-03 21:52:50,146 - root - INFO - CochesNET | encontrados: 
+2023-04-03 21:52:58,215 - root - INFO - CochesNET | encontrados: 
+2023-04-03 21:53:06,330 - root - INFO - CochesNET | encontrados: 
+2023-04-03 21:53:20,560 - root - INFO - MILANUNCIOS | encontrados: 
+2023-04-03 21:53:33,831 - root - INFO - MILANUNCIOS | encontrados: 
+2023-04-03 21:53:47,547 - root - INFO - MILANUNCIOS | encontrados: 
+2023-04-03 21:54:00,576 - root - INFO - MILANUNCIOS | encontrados: 
+2023-04-03 21:54:13,510 - root - INFO - MILANUNCIOS | encontrados: 
+2023-04-03 21:54:27,097 - root - INFO - MILANUNCIOS | encontrados: 
+2023-04-03 21:54:27,748 - root - INFO - Error: no se encontró el elemento. Detalles: Message: no such element: Unable to locate element: {"method":"tag name","selector":"img"}
+  (Session info: chrome=111.0.5563.147)
+Stacktrace:
+Backtrace:
+	(No symbol) [0x0087DCE3]
+	(No symbol) [0x008139D1]
+	(No symbol) [0x00724DA8]
+	(No symbol) [0x0075019F]
+	(No symbol) [0x007503AB]
+	(No symbol) [0x007487D1]
+	(No symbol) [0x0076AF14]
+	(No symbol) [0x00748726]
+	(No symbol) [0x0076B224]
+	(No symbol) [0x0077D57C]
+	(No symbol) [0x0076ACC6]
+	(No symbol) [0x00746F68]
+	(No symbol) [0x007480CD]
+	GetHandleVerifier [0x00AF3832+2506274]
+	GetHandleVerifier [0x00B29794+2727300]
+	GetHandleVerifier [0x00B2E36C+2746716]
+	GetHandleVerifier [0x00926690+617600]
+	(No symbol) [0x0081C712]
+	(No symbol) [0x00821FF8]
+	(No symbol) [0x008220DB]
+	(No symbol) [0x0082C63B]
+	BaseThreadInitThunk [0x75C17D49+25]
+	RtlInitializeExceptionChain [0x7753B74B+107]
+	RtlClearBits [0x7753B6CF+191]
+
+2023-04-03 21:54:40,366 - root - INFO - MILANUNCIOS | encontrados: 
+2023-04-03 21:54:40,462 - root - INFO - VOLKSWAGEN - GOLF ADVANCE 1.6 TDI 105CV BMT#@#@#5.300 €#@#@#95.000 kms 2015 Diesel#@#@#https://www.milanuncios.com/volkswagen-de-segunda-mano/volkswagen-golf-advance-1-6-tdi-105cv-bmt-478393634.htm#@#@#False#@#@#https://images.milanuncios.com/api/v1/ma-ad-media-pro/images/e5476ebb-6ffb-4839-93c5-9caf99b973a7?rule=hw396_70
+2023-04-03 21:54:40,653 - root - INFO - object Message can't be used in 'await' expression
+2023-04-03 21:54:53,453 - root - INFO - MILANUNCIOS | encontrados: 
+2023-04-03 21:54:53,550 - root - INFO - Esperando 6 minutos para volver a buscar...
+2023-04-03 21:55:58,874 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2023-04-03 21:55:58,876 - apscheduler.scheduler - INFO - Scheduler has been shut down
