@@ -15,7 +15,7 @@ from bs4 import BeautifulSoup
 import requests
 import sys
 import random
-
+import undetected_chromedriver as uc
 # OFFERS_URL ='https://es.wallapop.com/app/search?latitude=40.32432432432432&longitude=-3.781357301971911&category_ids=100&min_sale_price=1000&max_sale_price=6000&distance=100000&order_by=newest&country_code=ES&gearbox=manual&min_km=10000&max_km=170000&min_year=2005&favorite_search_id=532e4c05-2929-48bd-a97c-99ca18cd0c64&filters_source=stored_filters'
 
 
@@ -86,7 +86,6 @@ async def send_message(txt):
     except Exception as e:
         logging.error(e)
 
-
 def validate_wall_cookies():
     try:
         driver.get('https://es.wallapop.com/')
@@ -106,35 +105,18 @@ def validate_coches_cookies():
         print('coches')
         ## ACCEDER A COCHES.NET SIN SER BLOQUEADO
 
-        options = webdriver.ChromeOptions()
-        options.add_argument("start-maximized")
-        options.add_experimental_option("excludeSwitches", ["enable-automation"])
-        options.add_experimental_option('useAutomationExtension', False)
-        options.add_argument("--disable-blink-features=AutomationControlled")
-        # driver = webdriver.Chrome(options=options, executable_path=r'C:\WebDrivers\chromedriver.exe')
-        options.add_argument("--user-data-dir=C:\s")
-        driver = webdriver.Chrome(options=options)
+        uc.TARGET_VERSION = 85
+        driver = uc.Chrome()
+        driver.get('https://coches.net')
 
-        driver.execute_cdp_cmd('Network.setUserAgentOverride', {
-            "userAgent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.53 Safari/537.36'})
-        print(driver.execute_script("return navigator.userAgent;"))
-        driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
-        sleep(6)
-        driver.get('https://www.coches.net/')
-
-        sleep(3333)
-        # driver.get('https://www.coches.net/')
         # Esperar a que aparezca el mensaje de consentimiento
         wait = WebDriverWait(driver, 2)
-        # # element = wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'ot-sdk-container')))
         element = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'sui-MoleculeModal-dialog')))
-        # sleep(3)
-        # # Cerrar el mensaje de consentimiento
-        cerrar_btn = element.find_element(By.CLASS_NAME, 'sui-AtomButton')
+        sleep(1)
+        cerrar_btn = element.find_element(By.XPATH, '//button[@class="sui-AtomButton sui-AtomButton--primary sui-AtomButton--solid sui-AtomButton--center"]')
         cerrar_btn.click()
     except TimeoutException:
         print('no hay cons')
-
 
 def validate_mila_cookies():
     try:
@@ -308,7 +290,7 @@ async def coches_check():
 
 
 async def main():
-    # validate_wall_cookies()
+    validate_wall_cookies()
     validate_coches_cookies()
     # validate_mila_cookies()
     while (True):
