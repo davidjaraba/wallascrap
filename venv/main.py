@@ -17,6 +17,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import undetected_chromedriver as uc
 
+
 ## RECOLECTOR DE BASURA
 tracemalloc.start()
 
@@ -41,7 +42,6 @@ driver = webdriver.Chrome(options=chrome_options)
 ## ALTERNATIVO
 uc.TARGET_VERSION = 85
 driver_atl_options = uc.ChromeOptions()
-driver_atl_options.binary_location = r'C:\Users\velcas\Downloads\chrome-win\chrome-win\chrome.exe'
 driver_atl_options.add_argument('--headless')
 driver_alt = uc.Chrome(options=driver_atl_options)
 
@@ -91,10 +91,10 @@ async def send_message(txt, platform):
         text = "<em>{}</em>\n<strong>{}</strong> \n<b>Precio: {}</b>\n{}\n<a href='{}'>_</a>".format(platformStr,txtList[0],txtList[1], txtList[2],txtList[5])
 
         ##MIO
-        await bot.send_message('393154264', text, parse_mode='HTML', reply_markup=reply_markup)
+        bot.send_message('393154264', text, parse_mode='HTML', reply_markup=reply_markup)
 
         ##PP
-        # await bot.send_message('5875517685', text, parse_mode='HTML', reply_markup=reply_markup)
+        bot.send_message('5875517685', text, parse_mode='HTML', reply_markup=reply_markup)
 
     except Exception as e:
         debug_log_info(e)
@@ -346,7 +346,7 @@ async def mila_check():
 
                     location = e.find_element(By.XPATH, './/span[@class="ma-SharedText ma-AdLocation-text ma-AdLocation-text--isCardListingLocation ma-SharedText--s ma-SharedText--gray"]').text
 
-                    if ('(Madrid)' not in location):
+                    if '(Madrid)' not in location:
                         break
 
                     # reservada
@@ -363,7 +363,7 @@ async def mila_check():
                                                                                                                enlace,
                                                                                                                str(reservada),image)
 
-                    if (res not in lineas):
+                    if res not in lineas:
                         await send_message(res, 'mila')
 
                 except NoSuchElementException as ex:
@@ -415,10 +415,10 @@ def debug_log_info(txt):
 
 if __name__ == '__main__':
     debug_log_info('Iniciando el bot...')
-    start_bot()
+    # start_bot()
     t = threading.Thread(target=run_async_in_thread)
     t.start()
-    start_bot_async()
+    # start_bot_async()
 
 
 
