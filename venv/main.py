@@ -11,23 +11,19 @@ from time import sleep
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
-from telegram import Bot,InlineKeyboardButton, InlineKeyboardMarkup
+from telegram import Bot, InlineKeyboardButton, InlineKeyboardMarkup
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import undetected_chromedriver as uc
 
-
 ## RECOLECTOR DE BASURA
 tracemalloc.start()
-
 
 # OFFERS_URL ='https://es.wallapop.com/app/search?latitude=40.32432432432432&longitude=-3.781357301971911&category_ids=100&min_sale_price=1000&max_sale_price=6000&distance=100000&order_by=newest&country_code=ES&gearbox=manual&min_km=10000&max_km=170000&min_year=2005&favorite_search_id=532e4c05-2929-48bd-a97c-99ca18cd0c64&filters_source=stored_filters'
 
 
 TOKEN = '6267117945:AAGmojNJIm1EvnRlq7x3r8uYmio-sMKigJI'
-
-
 
 # Configura las opciones de Chrome
 chrome_options = Options()
@@ -43,9 +39,10 @@ driver = webdriver.Chrome(options=chrome_options)
 uc.TARGET_VERSION = 85
 driver_atl_options = uc.ChromeOptions()
 driver_atl_options.add_argument('--headless')
+driver_atl_options.add_argument(
+    '--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3')
+
 driver_alt = uc.Chrome(options=driver_atl_options)
-
-
 
 # conecto al bot de telegram
 bot = telegram.Bot(token=TOKEN)
@@ -53,22 +50,27 @@ updater = Updater("6267117945:AAGmojNJIm1EvnRlq7x3r8uYmio-sMKigJI", use_context=
 
 logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', level=logging.INFO)
 
+
 def start(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id, text="¡Hola! ¡Bienvenido al CARS SCRAP BOT!")
 
+
 def check(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id, text="FUNCIONANDO :D")
+
 
 def stop(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id, text="PARANDO EL BOT")
     os._exit(0)
 
+
 sleep(1)
+
 
 async def send_message(txt, platform):
     debug_log_info(txt)
-    with open(platform+"_encontrados.txt", "a") as archivo:
-        archivo.write("\n"+txt)
+    with open(platform + "_encontrados.txt", "a") as archivo:
+        archivo.write("\n" + txt)
     try:
         txtList = txt.split('#@#@#')
 
@@ -88,7 +90,11 @@ async def send_message(txt, platform):
         elif (platform == 'mila'):
             platformStr = 'MILANUNCIOS'
 
-        text = "<em>{}</em>\n<strong>{}</strong> \n<b>Precio: {}</b>\n{}\n<a href='{}'>_</a>".format(platformStr,txtList[0],txtList[1], txtList[2],txtList[5])
+        text = "<em>{}</em>\n<strong>{}</strong> \n<b>Precio: {}</b>\n{}\n<a href='{}'>_</a>".format(platformStr,
+                                                                                                     txtList[0],
+                                                                                                     txtList[1],
+                                                                                                     txtList[2],
+                                                                                                     txtList[5])
 
         ##MIO
         bot.send_message('393154264', text, parse_mode='HTML', reply_markup=reply_markup)
@@ -102,7 +108,15 @@ async def send_message(txt, platform):
 
 def validate_wall_cookies():
     try:
-        driver.get('https://es.wallapop.com/')
+        try:
+            driver.get('https://es.wallapop.com/')
+        except ConnectionRefusedError:
+            debug_log_info("Se ha rechazado la conexion a la URL especificada")
+        except ConnectionError:
+            debug_log_info("No se puede conectar a la URL especificada")
+        except Exception as e:
+            debug_log_info(f"Se ha producido una excepción: {e}")
+
         # Esperar a que aparezca el mensaje de consentimiento
         wait = WebDriverWait(driver, 2)
         # element = wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'ot-sdk-container')))
@@ -114,16 +128,25 @@ def validate_wall_cookies():
     except TimeoutException:
         debug_log_info('no hay cons')
 
+
 def validate_coches_cookies():
     try:
         ## ACCEDER A COCHES.NET SIN SER BLOQUEADO
-        driver_alt.get('https://coches.net')
+        try:
+            driver_alt.get('https://coches.net')
+        except ConnectionRefusedError:
+            debug_log_info("Se ha rechazado la conexion a la URL especificada")
+        except ConnectionError:
+            debug_log_info("No se puede conectar a la URL especificada")
+        except Exception as e:
+            print(f"Se ha producido una excepción: {e}")
 
         # Esperar a que aparezca el mensaje de consentimiento
         wait = WebDriverWait(driver_alt, 2)
         element = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'sui-MoleculeModal-dialog')))
         sleep(1)
-        cerrar_btn = element.find_element(By.XPATH, '//button[@class="sui-AtomButton sui-AtomButton--primary sui-AtomButton--solid sui-AtomButton--center"]')
+        cerrar_btn = element.find_element(By.XPATH,
+                                          '//button[@class="sui-AtomButton sui-AtomButton--primary sui-AtomButton--solid sui-AtomButton--center"]')
         cerrar_btn.click()
         sleep(2)
     except TimeoutException:
@@ -131,16 +154,21 @@ def validate_coches_cookies():
 
 
 async def wallapop_check():
-
-
     filters = []
     with open("filters_wallapop.txt", "r") as archivo_fil:
         filters = archivo_fil.readlines()
         filters = [fl.rstrip("\n") for fl in filters]
 
-
     for fls in filters:
-        driver.get(fls)
+        try:
+            driver.get(fls)
+        except ConnectionRefusedError:
+            debug_log_info("Se ha rechazado la conexion a la URL especificada")
+        except ConnectionError:
+            debug_log_info("No se puede conectar a la URL especificada")
+        except Exception as e:
+            debug_log_info(f"Se ha producido una excepción: {e}")
+
         sleep(2)
 
         # OBTENEMOS LOS COCHES YA ENVIADOS
@@ -148,7 +176,6 @@ async def wallapop_check():
         with open("wallapop_encontrados.txt", "r") as archivo:
             lineas = archivo.readlines()
             lineas = [linea.rstrip("\n") for linea in lineas]
-
 
         sleep(1)
 
@@ -194,7 +221,6 @@ async def wallapop_check():
                     # Cambiar el controlador de Selenium a la ventana principal
                     driver.switch_to.window(windows_before[0])
 
-
                     # reservada
                     reservada = False
 
@@ -205,9 +231,9 @@ async def wallapop_check():
                     except NoSuchElementException:
                         reservada = False
 
-                    res = '{}#@#@#{}#@#@#{}#@#@#{}#@#@#{}#@#@#{}'.format(titulo,precio, property.replace("\n"," "),
-                                                                                                               enlace,
-                                                                                                               str(reservada),image)
+                    res = '{}#@#@#{}#@#@#{}#@#@#{}#@#@#{}#@#@#{}'.format(titulo, precio, property.replace("\n", " "),
+                                                                         enlace,
+                                                                         str(reservada), image)
 
                     if (res not in lineas):
                         await send_message(res, 'wallapop')
@@ -222,23 +248,28 @@ async def wallapop_check():
                 # except:
                 #     pass
 
-async def coches_check():
 
+async def coches_check():
     filters = []
     with open("filters_coches.txt", "r") as archivo_fil:
         filters = archivo_fil.readlines()
         filters = [fl.rstrip("\n") for fl in filters]
 
     for fls in filters:
-        driver_alt.get(fls)
+        try:
+            driver_alt.get(fls)
+        except ConnectionRefusedError:
+            debug_log_info("Se ha rechazado la conexion a la URL especificada")
+        except ConnectionError:
+            debug_log_info("No se puede conectar a la URL especificada")
+        except Exception as e:
+            print(f"Se ha producido una excepción: {e}")
 
         # OBTENEMOS LOS COCHES YA ENVIADOS
         lineas = []
         with open("coches_encontrados.txt", "r") as archivo:
             lineas = archivo.readlines()
             lineas = [linea.rstrip("\n") for linea in lineas]
-
-
 
         for i in range(20):
             sleep(0.2)
@@ -268,9 +299,9 @@ async def coches_check():
                     # except NoSuchElementException:
                     #     reservada = False
 
-                    res = '{}#@#@#{}#@#@#{}#@#@#{}#@#@#{}#@#@#{}'.format(titulo,precio, property.replace("\n"," "),
-                                                                                                               enlace,
-                                                                                                               str(reservada),image)
+                    res = '{}#@#@#{}#@#@#{}#@#@#{}#@#@#{}#@#@#{}'.format(titulo, precio, property.replace("\n", " "),
+                                                                         enlace,
+                                                                         str(reservada), image)
 
                     if (res not in lineas):
                         await send_message(res, 'coches')
@@ -285,8 +316,9 @@ async def coches_check():
                 except:
                     pass
 
-async def mila_check():
 
+
+async def mila_check():
     filters = []
     with open("filters_mila.txt", "r") as archivo_fil:
         filters = archivo_fil.readlines()
@@ -299,7 +331,14 @@ async def mila_check():
 
         sleep(1)
 
-        driver_alt.get(fls)
+        try:
+            driver_alt.get(fls)
+        except ConnectionRefusedError:
+            debug_log_info("Se ha rechazado la conexion a la URL especificada")
+        except ConnectionError:
+            debug_log_info("No se puede conectar a la URL especificada")
+        except Exception as e:
+            debug_log_info(f"Se ha producido una excepción: {e}")
 
         sleep(1)
 
@@ -314,16 +353,14 @@ async def mila_check():
         except:
             pass
 
-
         # submitBtn = driver_alt.find_element(By.CLASS_NAME, 'sui-AtomButton')
         # submitBtn.click()
 
-        #OBTENEMOS LOS COCHES YA ENVIADOS
+        # OBTENEMOS LOS COCHES YA ENVIADOS
         lineas = []
         with open("mila_encontrados.txt", "r") as archivo:
             lineas = archivo.readlines()
             lineas = [linea.rstrip("\n") for linea in lineas]
-
 
         for i in range(20):
             sleep(0.2)
@@ -344,9 +381,10 @@ async def mila_check():
                     image = e.find_element(By.TAG_NAME, 'img').get_attribute('src')
                     enlace = e.find_element(By.CLASS_NAME, 'ma-AdCardListingV2-TitleLink').get_attribute('href')
 
-                    location = e.find_element(By.XPATH, './/span[@class="ma-SharedText ma-AdLocation-text ma-AdLocation-text--isCardListingLocation ma-SharedText--s ma-SharedText--gray"]').text
+                    location = e.find_element(By.XPATH,
+                                              './/span[@class="ma-SharedText ma-AdLocation-text ma-AdLocation-text--isCardListingLocation ma-SharedText--s ma-SharedText--gray"]').text
 
-                    if '(Madrid)' not in location:
+                    if ('(Madrid)' not in location):
                         break
 
                     # reservada
@@ -359,11 +397,11 @@ async def mila_check():
                     # except NoSuchElementException:
                     #     reservada = False
 
-                    res = '{}#@#@#{}#@#@#{}#@#@#{}#@#@#{}#@#@#{}'.format(titulo,precio, property.replace("\n"," "),
-                                                                                                               enlace,
-                                                                                                               str(reservada),image)
+                    res = '{}#@#@#{}#@#@#{}#@#@#{}#@#@#{}#@#@#{}'.format(titulo, precio, property.replace("\n", " "),
+                                                                         enlace,
+                                                                         str(reservada), image)
 
-                    if res not in lineas:
+                    if (res not in lineas):
                         await send_message(res, 'mila')
 
                 except NoSuchElementException as ex:
@@ -381,6 +419,7 @@ def start_bot_async():
     updater.start_polling()
     updater.idle()
 
+
 def start_bot():
     start_handler = CommandHandler('start', start)
     check_handler = CommandHandler('check', check)
@@ -392,15 +431,15 @@ def start_bot():
 
 async def search_cars():
     debug_log_info('Buscando coches...')
-    validate_wall_cookies()
+    # validate_wall_cookies()
     validate_coches_cookies()
     while (True):
-        await wallapop_check()
+        # await wallapop_check()
         await coches_check()
         await mila_check()
         debug_log_info('Esperando 6 minutos para volver a buscar...')
         sleep(360)
-    driver.quit()
+
 
 def run_async_in_thread():
     loop = asyncio.new_event_loop()
@@ -420,7 +459,5 @@ if __name__ == '__main__':
     t.start()
     # start_bot_async()
 
-
-
 # print('- Coche: titulo: {} precio: {} enlace: {} reservada: {}'.format(titulo,precio,enlace.get_attribute('href'),str(reservada)))
-                # bot.send_message(chat_id='393154264', text=res)
+# bot.send_message(chat_id='393154264', text=res)
